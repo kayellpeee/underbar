@@ -119,8 +119,6 @@ describe('each', function() {
 describe('indexOf', function() {
   it('should have 40 in the list', function() {
     var numbers = [10, 20, 30, 40, 50];
-    console.log(String(_.indexOf));
-
     expect(_.indexOf(numbers, 40)).to.be(3);
   });
 
@@ -172,6 +170,14 @@ describe('filter', function() {
 
 describe('reject', function() {
   it('should reject all even numbers', function() {
+    _.reject = function(array, action) {
+      var result =[];
+      for (var i = 0; i < array.length; i++) {
+        if (action(array[i]) === false){
+        result.push(array[i]);
+      }
+    }; return result;
+  };
     var isEven = function(num) { return num % 2 === 0; };
     var odds = _.reject([1, 2, 3, 4, 5, 6], isEven);
 
