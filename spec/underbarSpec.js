@@ -30,6 +30,15 @@ describe('first', function() {
 
 describe('last', function() {
   it('should pull the last element from an array', function() {
+    _.last = function(obj, n){if (arguments.length === 1) {return obj[obj.length-1]} else{
+      var result = [];
+      for(var i = obj.length - n; i < obj.length; i++){
+        if(obj[i] != undefined){
+          result.push(obj[i]);
+        };
+      }; return result;
+    };
+  };
     expect(_.last([1,2,3])).to.equal(3);
   });
 
