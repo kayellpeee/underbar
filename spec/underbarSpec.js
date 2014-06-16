@@ -60,6 +60,18 @@ describe('each', function() {
     var animals = ['ant', 'bat', 'cat'];
     var iterationInputs = [];
 
+    _.each = function(object, action){
+      if(Array.isArray(object) === true) {
+        for(var i = 0; i < object.length; i++) {
+          action(object[i], object.indexOf(object[i]), object);};
+        }
+      else {
+        for(var k in object) {
+          action(object[k], k, object);
+        }
+      };
+    };
+
     _.each(animals, function(animal, index, list) {
       iterationInputs.push([animal, index, list]);
     });
