@@ -2,13 +2,17 @@ describe('identity', function() {
   var uniqueObject = {};
 
   it('should return whatever value is passed into it', function() {
-    expect((1)).to.equal(1);
+    _.identity = function(){for (var i = 0; i < arguments.length; i++) {
+      return arguments[i];
+    };};
 
-    expect(('string')).to.equal('string');
+    expect(_.identity(1)).to.equal(1);
 
-    expect((false)).to.equal(false);
+    expect(_.identity('string')).to.equal('string');
 
-    expect((uniqueObject)).to.equal(uniqueObject);
+    expect(_.identity(false)).to.equal(false);
+
+    expect(_.identity(uniqueObject)).to.equal(uniqueObject);
   });
 });
 
