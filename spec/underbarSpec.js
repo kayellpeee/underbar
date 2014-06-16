@@ -148,6 +148,14 @@ describe('indexOf', function() {
 
 describe('filter', function() {
   it('should return all even numbers in an array', function() {
+    _.filter = function(array, action) {
+      var result =[];
+      for (var i = 0; i < array.length; i++) {
+        if (action(array[i]) === true){
+        result.push(array[i]);
+      }
+    }; return result;
+  };
     var isEven = function(num) { return num % 2 === 0; };
     var evens = _.filter([1, 2, 3, 4, 5, 6], isEven);
 
