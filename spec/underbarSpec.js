@@ -265,6 +265,19 @@ describe('invoke, when provided a method name', function() {
 
 describe('reduce', function() {
   it('should be able to sum up an array', function() {
+    _.reduce = function(collection, iterator, start){
+      if(arguments.length < 3) {var result = collection[0];} else {var result = start;};
+      if (Array.isArray(collection)) {
+        for (var i = 0; i < collection.length; i++) {
+          result = iterator(result, collection[i])
+        };
+      } else{
+        for(var key in collection){
+          result = iterator(result, collection[key]);
+        };
+      };
+      return result;
+    };
     var add = function(tally, item) {return tally + item; };
     var total = _.reduce([1, 2, 3], add, 0);
 
