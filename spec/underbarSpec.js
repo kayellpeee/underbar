@@ -195,6 +195,15 @@ describe('reject', function() {
 describe('uniq', function() {
   it('should return all unique values contained in an unsorted array', function() {
     var list = [1, 2, 1, 3, 1, 4];
+    _.uniq = function(array) {
+      var result = [];
+      for (var i = 0; i < array.length; i++) {
+        if(result.indexOf(array[i]) === -1){
+          result.push(array[i]);
+        }
+      };
+      return result;
+    }
 
     expect(_.uniq(list)).to.eql([1, 2, 3, 4]);
   });
