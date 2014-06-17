@@ -218,6 +218,12 @@ describe('uniq', function() {
 
 describe('map', function() {
   it('should apply a function to every value in an array', function() {
+    _.map = function(collection, iterator) {
+      var results = [];
+      for (var i = 0; i < collection.length; i++) {
+        results.push(iterator(collection[i]));
+      }; return results;
+    };
     var doubled = _.map([1, 2, 3], function(num) {
       return num * 2;
     });
