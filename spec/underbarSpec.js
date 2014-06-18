@@ -375,6 +375,23 @@ describe('every', function() {
 });
 
 describe('some', function() {
+  _.some = function (collection, iterator){
+    var result = [];
+    if (arguments.length === 1) {
+      for (var i = 0; i < collection.length; i++) {
+        result.push(!!collection[i]);
+      };
+    } else {
+      for (var i = 0; i < collection.length; i++) {
+        result.push(!!iterator(collection[i]));
+      };
+      console.log(result);
+    };
+    if (result.indexOf(true) != -1) {
+      return true;
+    } else {
+      return false;};
+  };
   var nativeSome = Array.prototype.some;
   var isEven = function(number){
     return number % 2 === 0;
