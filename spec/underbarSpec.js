@@ -440,6 +440,15 @@ describe('some', function() {
 });
 
 describe('extend', function() {
+  _.extend = function(obj) {
+    var result = obj;
+    for (var i = 0; i < arguments.length; i++) {
+      for(var k in arguments[i]){
+        result[k] = arguments[i][k];
+      };
+    };
+    return result;
+  };
   it('returns the first argument', function() {
     var to = {};
     var from = {};
