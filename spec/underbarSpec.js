@@ -247,12 +247,13 @@ describe('invoke, when provided a function reference', function() {
   it('runs the input function on each item in the array, and returns a list of results', function() {
     _.invoke = function(collection, functionOrName){
       var result = [];
-      for (var i = 0; i < collection.length; i++) {
-        result.push(functionOrName.call(collection[i]));
-      };
       if(typeof functionOrName === "string"){
         for (var i = 0; i < collection.length; i++) {
-          result.push(collection[i].functionOrName());
+          result.push(collection[i][functionOrName]());
+        };
+      } else {
+        for (var i = 0; i < collection.length; i++) {
+          result.push(functionOrName.call(collection[i]));
         };
       };
       return result;
@@ -320,6 +321,21 @@ describe('contains', function() {
 });
 
 describe('every', function() {
+  _.every = function (collection, iterator){
+    var result = [];
+    if (arguments.length === 1) {
+      result = collection;
+    } else {
+      for (var i = 0; i < collection.length; i++) {
+        result.push(!!iterator(collection[i]));
+      };
+    };
+    if (result.indexOf(false) != -1) {
+      return false;
+    } else {
+      return true;};
+  };
+
   it('passes by default for an empty collection', function() {
     expect(_.every([], _.identity)).to.equal(true);
   });
