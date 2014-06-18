@@ -336,7 +336,7 @@ describe('every', function() {
     expect(_.every([0], _.identity)).to.equal(false);
   });
 
-  it('treats each item as as a callback result when no callback is provided', function() {
+  it('treats each item as a callback result when no callback is provided', function() {
     expect(_.every([true, true, true])).to.equal(true);
   });
 
@@ -587,6 +587,17 @@ describe('delay', function() {
 });
 
 describe('shuffle', function() {
+  _.shuffle = function(array) {
+      var result = [];
+      var temporary = [];
+      for (var i = 0; i < array.length; i++) {
+        temporary.push(array[i]);
+      };
+      for (var i = 0; i < array.length; i++) {
+        result.push(temporary.splice(Math.floor(Math.random()*temporary.length), 1)[0]);
+      };
+      return result;
+    };
   it('should not modify the original object', function() {
     var numbers = [4, 5, 6];
     var shuffled = _.shuffle(numbers).sort();
