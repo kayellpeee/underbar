@@ -385,7 +385,6 @@ describe('some', function() {
       for (var i = 0; i < collection.length; i++) {
         result.push(!!iterator(collection[i]));
       };
-      console.log(result);
     };
     if (result.indexOf(true) != -1) {
       return true;
@@ -501,6 +500,17 @@ describe('extend', function() {
 });
 
 describe('defaults', function() {
+  _.defaults = function(obj) {
+    var result = obj;
+    for (var i = 0; i < arguments.length; i++) {
+      for(var k in arguments[i]){
+        if(k in obj ===false) {
+          result[k] = arguments[i][k];
+        };
+      };
+    };
+    return result;
+  };
   var options;
 
   beforeEach(function() {
