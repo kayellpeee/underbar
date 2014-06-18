@@ -245,6 +245,18 @@ describe('pluck', function() {
 
 describe('invoke, when provided a function reference', function() {
   it('runs the input function on each item in the array, and returns a list of results', function() {
+    _.invoke = function(collection, functionOrName){
+      var result = [];
+      for (var i = 0; i < collection.length; i++) {
+        result.push(functionOrName.call(collection[i]));
+      };
+      if(typeof functionOrName === "string"){
+        for (var i = 0; i < collection.length; i++) {
+          result.push(collection[i].functionOrName());
+        };
+      };
+      return result;
+    }
     var reverse = function(){
       return this.split('').reverse().join('');
     };
