@@ -630,6 +630,14 @@ describe('memoize', function() {
 });
 
 describe('delay', function() {
+  _.delay = function(func, wait) {
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    };
+    if(arguments.length > 2) {args.splice(0, 2)}
+    window.setTimeout(function() {func.apply(this, args)}, wait);
+  }
   var clock;
 
   beforeEach(function() {
