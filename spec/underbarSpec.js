@@ -576,6 +576,19 @@ describe('once', function() {
 });
 
 describe('memoize', function() {
+  _.memoize = function(func) {
+    var cache = {};
+    var result;
+    return function (arg) {
+      if(arg in cache) {
+        result = cache[arg];}
+        else {
+          result = func.apply(this, arguments);
+          cache[arg] = result;
+        }
+        return result;
+    }
+  };
   var fib, fastFib, timeCheck, fastTime, wait;
 
   beforeEach(function() {
